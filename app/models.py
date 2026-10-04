@@ -22,6 +22,11 @@ class Agent:
     created_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
     memory: List[str] = field(default_factory=list)
 
+    def __post_init__(self) -> None:
+        # Handle case where created_at is loaded as a string from JSON
+        if isinstance(self.created_at, str):
+            self.created_at = datetime.fromisoformat(self.created_at)
+
     def to_dict(self) -> dict[str, Any]:
         return {
             "id": self.id,
@@ -64,6 +69,13 @@ class Task:
     assigned_agent: str | None = None
     created_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
     updated_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+
+    def __post_init__(self) -> None:
+        # Handle case where timestamps are loaded as strings from JSON
+        if isinstance(self.created_at, str):
+            self.created_at = datetime.fromisoformat(self.created_at)
+        if isinstance(self.updated_at, str):
+            self.updated_at = datetime.fromisoformat(self.updated_at)
 
     def to_dict(self) -> dict[str, Any]:
         return {
