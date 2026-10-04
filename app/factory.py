@@ -22,7 +22,6 @@ class AgentFactory:
 
     def _hydrate(self) -> None:
         for raw in self.state.get("agents", []):
-            # Handle both old "type" and new "agent_type" formats
             if "type" in raw and "agent_type" not in raw:
                 raw["agent_type"] = raw.pop("type")
             agent = Agent(**raw)
