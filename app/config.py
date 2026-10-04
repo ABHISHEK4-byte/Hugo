@@ -1,0 +1,5 @@
+APP_NAME = "Hugo"
+APP_VERSION = "0.1.0"
+DATA_DIR = "data"
+STATE_FILE = "state.json"
+DEFAULT_IDENTITY = "Abhishek a professional software eng"
